@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 
+export const maxDuration = 30;
+
 export async function POST(req: NextRequest) {
   const { text, people, today } = await req.json();
 
@@ -17,7 +19,7 @@ export async function POST(req: NextRequest) {
     : 'No existing people yet.';
 
   const message = await client.messages.create({
-    model: 'claude-opus-4-7',
+    model: 'claude-haiku-4-5',
     max_tokens: 1024,
     messages: [{
       role: 'user',
