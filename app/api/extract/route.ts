@@ -4,26 +4,28 @@ import Anthropic from '@anthropic-ai/sdk';
 export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
-  const { text, people, today } = await req.json();
+  try {
+    const { text, people, today } = await req.json();
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    return NextResponse.json({ error: `ANTHROPIC_API_KEY not set in .env.local (keys: ${Object.keys(process.env).filter(k => k.includes('ANTHROPIC')).join(',') || 'none'})` }, { status: 500 });
-  }
-  const client = new Anthropic({ apiKey });
+    const apiKey = process.env.ANTHROPIC_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: 'ANTHROPIC_API_KEY not set' }, { status: 500 });
+    }
 
-  const existingList = people.length > 0
-    ? `Existing people:\n${people.map((p: { id: string; name: string; company?: string }) =>
-        `- id:"${p.id}" name:"${p.name}"${p.company ? ` company:"${p.company}"` : ''}`
-      ).join('\n')}`
-    : 'No existing people yet.';
+    const client = new Anthropic({ apiKey });
 
-  const message = await client.messages.create({
-    model: 'claude-haiku-4-5',
-    max_tokens: 1024,
-    messages: [{
-      role: 'user',
-      content: `Extract structured information from this voice note about someone I met or a meeting I had.
+    const existingList = people.length > 0
+      ? `Existing people:\n${people.map((p: { id: string; name: string; company?: string }) =>
+          `- id:"${p.id}" name:"${p.name}"${p.company ? ` company:"${p.company}"` : ''}`
+        ).join('\n')}`
+      : 'No existing people yet.';
+
+    const message = await client.messages.create({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 1024,
+      messages: [{
+        role: 'user',
+        content: `Extract structured information from this voice note about someone I met or a meeting I had.
 
 Today is ${today}.
 ${existingList}
@@ -56,18 +58,18 @@ Rules:
 - meeting object is optional — omit entirely if no meeting details
 - attendees = OTHER people present, not the main person
 - If a person name matches an existing entry, set existingPersonId`,
-    }],
-  });
+      }],
+    });
 
-  const block = message.content[0];
-  if (block.type !== 'text') {
-    return NextResponse.json({ error: 'Unexpected response type' }, { status: 500 });
-  }
+    const block = message.content[0];
+    if (block.type !== 'text') {
+      return NextResponse.json({ error: 'Unexpected response type' }, { status: 500 });
+    }
 
-  try {
     const json = block.text.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim();
     return NextResponse.json(JSON.parse(json));
-  } catch {
-    return NextResponse.json({ error: 'Failed to parse response', raw: block.text }, { status: 500 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

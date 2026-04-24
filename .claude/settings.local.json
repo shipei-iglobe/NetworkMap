@@ -40,7 +40,8 @@
       "Bash(getent services *)",
       "Bash(python3 -c \"import socket; print\\(socket.getservbyname\\('hbci'\\)\\)\")",
       "Bash(~/.volta/bin/npm install *)",
-      "Bash(~/.volta/bin/node -e \"require\\('@vercel/kv'\\); console.log\\('ok'\\)\")"
+      "Bash(~/.volta/bin/node -e \"require\\('@vercel/kv'\\); console.log\\('ok'\\)\")",
+      "Bash(~/.volta/bin/npm uninstall *)"
     ]
   }
 }
