@@ -1,0 +1,81 @@
+{
+  "people": [
+    {
+      "id": "b56df8e8-313d-4023-abc1-4f544a5d6595",
+      "name": "Sophia Ng",
+      "company": "Enterprise Singapore",
+      "role": "",
+      "linkedin": "",
+      "whatsapp": "",
+      "email": "",
+      "connections": [
+        "061202ec-ce9f-460e-ae2a-e4f232f04c3a"
+      ],
+      "x": 400,
+      "y": 100
+    },
+    {
+      "id": "061202ec-ce9f-460e-ae2a-e4f232f04c3a",
+      "name": "Joyce Ng",
+      "company": "iGlobe Partners",
+      "role": "General Partner",
+      "linkedin": "",
+      "whatsapp": "",
+      "email": "",
+      "connections": [
+        "b56df8e8-313d-4023-abc1-4f544a5d6595",
+        "31ec93eb-7482-4d08-b6f2-552d78c9b047"
+      ],
+      "x": 400,
+      "y": 500
+    },
+    {
+      "id": "31ec93eb-7482-4d08-b6f2-552d78c9b047",
+      "name": "Keerat Singh Sethi",
+      "company": "",
+      "role": "",
+      "linkedin": "",
+      "whatsapp": "",
+      "email": "",
+      "connections": [
+        "061202ec-ce9f-460e-ae2a-e4f232f04c3a"
+      ],
+      "x": 226.7949192431123,
+      "y": 400.00000000000006
+    }
+  ],
+  "meetings": [
+    {
+      "id": "7b575d35-d4e3-4064-863c-d2036611b34e",
+      "personId": "b56df8e8-313d-4023-abc1-4f544a5d6595",
+      "date": "2026-04-24",
+      "time": "",
+      "location": "Claude Hackathon",
+      "notes": "Met Sophia Ng from Enterprise Singapore at the Claude Hackathon. She helped bring Singapore companies like Singapore Airlines to the event. Joyce Ng, General Partner of iGlobe Partners, also knows Sophia.",
+      "topics": [
+        "hackathon",
+        "Enterprise Singapore",
+        "partnerships",
+        "Singapore Airlines"
+      ],
+      "attendees": [
+        "061202ec-ce9f-460e-ae2a-e4f232f04c3a"
+      ]
+    },
+    {
+      "id": "7063d7ca-c67b-429b-bfce-c89b3b19aad3",
+      "personId": "31ec93eb-7482-4d08-b6f2-552d78c9b047",
+      "date": "2026-03-11",
+      "time": "",
+      "location": "Pixverse Singapore office",
+      "notes": "Met Keerat Singh Sethi at Pixverse Singapore office opening. Followed up on 20th March 2026 with another meeting at the iGlobe office.",
+      "topics": [
+        "office opening",
+        "follow-up"
+      ],
+      "attendees": [
+        "061202ec-ce9f-460e-ae2a-e4f232f04c3a"
+      ]
+    }
+  ]
+}
